@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, message } from 'antd'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
@@ -17,17 +18,26 @@ const layout = {
 };
 const Login = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     //form handler
     const onFinishHandler = async (values) => {
         try {
             dispatch(showLoading());
             const res = await axios.post('api/v1/user/login', values)
             dispatch(hideLoading());
+            console.log('Response:', res.data); // Check the response data
             if (res.data.success) {
                 localStorage.setItem("token", res.data.token)
                 message.success('Login Successful')
-                navigate('/')
+                // navigate('/')
+
+                const isAdmin = res.data.data.isAdmin;
+
+                if (isAdmin) {
+                    navigate('/admin');
+                } else {
+                    navigate('/');
+                }
 
             }
             else {
@@ -40,6 +50,7 @@ const Login = () => {
             message.error('Something went wrong')
         }
     }
+
     return (
         <div className="form-container">
             <Form className="signup-form" onFinish={onFinishHandler}

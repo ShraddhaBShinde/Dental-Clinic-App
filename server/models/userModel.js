@@ -29,7 +29,14 @@ const userSchema = new mongoose.Schema({
     //     type: String,
     //     required: [true, 'password is matched']
     // }
-
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    // isDoctor: {
+    //     type: Boolean,
+    //     default: false
+    // }
 
 });
 

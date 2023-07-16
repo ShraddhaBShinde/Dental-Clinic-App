@@ -37,7 +37,17 @@ const loginController = async (req, res) => {
             return res.status(200).send({ message: 'Invalid email or password', success: false });
         }
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.status(200).send({ message: 'Login Successful!', success: true, token });
+        // Add isAdmin field to the response object
+        res.status(200).send({
+            message: 'Login Successful!',
+            success: true,
+            token,
+            data: {
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
+            },
+        });
     }
     catch (error) {
         console.log(error)
@@ -45,5 +55,33 @@ const loginController = async (req, res) => {
     }
 }
 
+const authController = async (req, res) => {
+    try {
+        const user = await userModel.findById({ _id: req.body.userId });
+        user.password = undefined;
+        if (!user) {
+            return res.status(200).send({
+                message: "user not found",
+                success: false,
+            });
+        } else {
+            res.status(200).send({
+                success: true,
+                data: {
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                },
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "auth error",
+            success: false,
+            error,
+        });
+    }
+};
 
-module.exports = { loginController, signupController };
+module.exports = { loginController, signupController, authController };

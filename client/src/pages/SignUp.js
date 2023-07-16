@@ -5,16 +5,16 @@ import { Link, useNavigate } from "react-router-dom"
 import "../styles/SignUpStyle.css";
 const { Option } = Select;
 
-const layout = {
-    // labelCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 8 }, lg: { span: 8 } },
-    // wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 }, lg: { span: 12 } }
-    // labelCol: {
-    //     span: 8,
-    // },
-    // wrapperCol: {
-    //     span: 16,
-    // },
-};
+// const layout = {
+//     // labelCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 8 }, lg: { span: 8 } },
+//     // wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 }, lg: { span: 12 } }
+//     // labelCol: {
+//     //     span: 8,
+//     // },
+//     // wrapperCol: {
+//     //     span: 16,
+//     // },
+// };
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -39,8 +39,8 @@ const SignUp = () => {
     return (
         <>
             <div className="form-container">
-                <Form className="signup-form" onFinish={onFinishHandler}
-                    {...layout}
+                <Form className="signup-form" layout="vertical" onFinish={onFinishHandler}
+                    // {...layout}
                     name="nest-messages"
                     wrapperCol={{ sm: 24 }}>
 
