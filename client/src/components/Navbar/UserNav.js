@@ -22,17 +22,19 @@ import { adminMenu, userMenu } from '../Menu';
 import { message } from 'antd';
 
 
-const pages = [
-    { title: "Appointments", path: "/view-appointments" },
-    // { title: "Profile", path: "/profile" },
-    // { title: "Patients", path: "/admin/patients" },
-];
-// const settings = [
-//     { title: "Profile", path: "/user/profile" },
-//     { title: "Account", path: "/user/account" },
-//     { title: "Dashboard", path: "/user/dashboard" },
-//     { title: "Logout", path: "/login " },
+// const pages = [
+//     { title: "Appointments", path: "/view-appointments" },
+//     // { title: "Profile", path: "/profile" },
+//     // { title: "Patients", path: "/admin/patients" },
 // ];
+const settings = [
+    // { title: "Home", path: "/" },
+    { title: "Book Appointment", path: "/book-appointment" },
+    { title: "View appointments", path: "/view-appointments" },
+    { title: "View doctors", path: "/view-doctors" },
+    // { title: "Login", path: "/login" },
+    { title: "Logout", path: "/login " },
+];
 
 
 const UserNav = () => {
@@ -90,105 +92,35 @@ const UserNav = () => {
     return (
         <AppBar position="static" style={{ background: '#F31559' }}>
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <InsertEmoticonIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component={NavLink}
-                        to="/admin"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        SMILE MAKERS
-                    </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
+                <Toolbar>
+                    <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                        <InsertEmoticonIcon sx={{ mr: 1 }} />
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component={NavLink}
+                            to="/admin"
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                mr: 2,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center" component={NavLink} to={page.path}>
-                                        {page.title}</Typography>
-                                    {/* <Button onClick={() => { Navigate(`/${pages}`) }}>{pages}</Button> */}
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                    <InsertEmoticonIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component={NavLink}
-                        to=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Smile Makers
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'left' }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page.title}
-                                onClick={handleCloseNavMenu}
-                                component={NavLink}
-                                to={page.path}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page.title}
-                            </Button>
-                        ))}
+                            SMILE MAKERS
+                        </Typography>
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <MenuIcon sx={{ mr: 1 }} />
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar src={profileicon} />
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -203,14 +135,11 @@ const UserNav = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {userMenu.map((menu) => (
-                                <MenuItem key={menu.name} onClick={() => handleSettingClick(menu.name)}>
-                                    {/* <Button onClick={() => { Navigate(`/${settings}`) }}>{settings}</Button> */}
-                                    <Button component={NavLink} to={menu.path}>{menu.name}</Button>
-                                    {/* <Button onClick={() => { Navigate(`/${setting.path}`) }}>{setting.title}</Button> */}
+                            {settings.map((setting) => (
+                                <MenuItem key={setting.title} onClick={() => handleSettingClick(setting.title)}>
+                                    <Button component={NavLink} to={setting.path}>{setting.title}</Button>
                                 </MenuItem>
                             ))}
-
                         </Menu>
                     </Box>
                 </Toolbar>
@@ -226,3 +155,4 @@ export default UserNav
 //const { user } = useSelector(state => state.user)
 
 //#2E3B55
+//#F31559

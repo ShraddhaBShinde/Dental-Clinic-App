@@ -1,5 +1,4 @@
 import React from 'react'
-import UserNav from '../../components/Navbar/UserNav'
 
 const ViewAppointments = () => {
     return (

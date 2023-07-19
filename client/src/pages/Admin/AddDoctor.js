@@ -13,14 +13,15 @@ const AddDoctor = () => {
     const handleFinish = async (values) => {
         try {
             dispatch(showLoading());
-            const res = await axios.post('/api/v1/ad/doctor-add', values);
+            const res = await axios.post('/api/v1/admin/doctor-add', values);
             console.log(res.data);
 
             dispatch(hideLoading());
             if (res.data.success) {
-                notification.success({
-                    message: "Doctor added Successfully"
-                });
+                // notification.success({
+                //     message: "Doctor added Successfully"
+                // });
+                message.success('Doctor added!')
                 navigate('/admin/doctors');
             }
             else {
@@ -105,7 +106,7 @@ const AddDoctor = () => {
                     </Col>
                     <Col xs={24} md={24} lg={8}>
                         <Form.Item
-                            label="Experience"
+                            label="Experience (in years)"
                             name="experience"
                             required
                             rules={[{ required: true }]}

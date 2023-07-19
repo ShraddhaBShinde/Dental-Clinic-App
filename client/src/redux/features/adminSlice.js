@@ -1,21 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    isAdmin: false,
+    isAdmin: false, // Initialize isAdmin as a property of the state
 };
 
-export const adminSlice = createSlice({
-    name: "ad",
+const adminSlice = createSlice({
+    name: 'admin',
     initialState,
     reducers: {
-        setAdmin: (state, action) => {
-            state.isAdmin = action.payload;
+        setAdminStatus: (state, action) => {
+            state.isAdmin = action.payload; // Update the isAdmin property directly
         },
+
     },
 });
 
-export const { setAdmin } = adminSlice.actions;
-
-export const selectAdmin = (state) => state.admin.isAdmin;
-
-// export default adminSlice.reducer;
+export const { setAdminStatus, setAdmin } = adminSlice.actions;
+export default adminSlice.reducer;

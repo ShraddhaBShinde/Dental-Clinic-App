@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
+    // _id: mongoose.Types.ObjectId,
+    // _id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'users',
+    // },
     name: {
         type: String,
         required: [true, 'name is required']
@@ -39,6 +44,10 @@ const userSchema = new mongoose.Schema({
     // }
 
 });
+// Compare password method
+userSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 const userModel = mongoose.model('users', userSchema)
 

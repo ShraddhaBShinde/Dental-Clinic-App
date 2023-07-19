@@ -12,7 +12,7 @@ const ManageDoctors = () => {
 
     const fetchDoctors = async () => {
         try {
-            const response = await axios.get('/api/v1/ad/doctors');
+            const response = await axios.get('/api/v1/user/doctors');
             setDoctors(response.data.data);
         } catch (error) {
             console.log(error);
@@ -21,7 +21,7 @@ const ManageDoctors = () => {
 
     const handleEdit = async (doctorId) => {
         try {
-            const response = await axios.delete(`/api/v1/ad/doctors/${doctorId}`);
+            const response = await axios.delete(`/api/v1/user/doctors/${doctorId}`);
             if (response.data.success) {
                 setDoctors(doctors.filter((doctor) => doctor.userId !== doctorId));
                 console.log('Doctor deleted successfully');
@@ -34,11 +34,23 @@ const ManageDoctors = () => {
 
     const handleDelete = async (doctorId) => {
         // Implement logic to handle delete
+        // Validate the doctorId parameter
+        if (!doctorId || typeof doctorId !== 'string') {
+            console.log('Invalid doctorId');
+            return;
+        }
+
+        // Ensure that the doctorId is a valid MongoDB document ID
+        // const validIdRegex = /^[0-9a-fA-F]{24}$/;
+        // if (!validIdRegex.test(doctorId)) {
+        //     console.log('Invalid doctorId format');
+        //     return;
+        // }
         try {
-            const response = await axios.delete(`/api/v1/ad/doctors/${doctorId}`);
+            const response = await axios.delete(`/api/v1/user/doctors/${doctorId}`);
             if (response.data.success) {
                 // Update doctors state by removing the deleted doctor
-                setDoctors(doctors.filter(doctor => doctor.userId !== doctorId));
+                setDoctors(doctors.filter(doctor => doctor._id !== doctorId));
                 // Show success notification or perform any other action
                 console.log('Doctor deleted successfully');
             }
@@ -67,15 +79,14 @@ const ManageDoctors = () => {
                         </TableHead>
                         <TableBody>
                             {doctors.map(doctor => (
-                                <TableRow key={doctor.userId}>
+                                <TableRow key={doctor._id}>
                                     <TableCell>{`${doctor.firstName} ${doctor.lastName}`}</TableCell>
                                     <TableCell>{doctor.phone}</TableCell>
                                     <TableCell>{doctor.email}</TableCell>
                                     <TableCell>{doctor.specialization}</TableCell>
                                     <TableCell>{doctor.feesPerCunsaltation}</TableCell>
                                     <TableCell>
-                                        <Button variant="contained" color="primary" onClick={() => handleEdit(doctor.userId)}>Edit</Button>
-                                        <Button variant="contained" color="error" onClick={() => handleDelete(doctor.userId)}>Delete</Button>
+                                        <Button variant="contained" color="error" onClick={() => handleDelete(doctor._id)}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

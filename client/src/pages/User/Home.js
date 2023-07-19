@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Container, Grid, Button, Box } from '@mui/material';
 import appointmenticon from '../pages-assets/appointmenticon.jpg';
-import UserNav from '../../components/Navbar/UserNav';
-import BookAppointment from './BookAppointment';
+import doctoricon from '../pages-assets/doctoricon.jpg'
+import myappointment from '../pages-assets/myappointment.jpg'
 import { Link } from 'react-router-dom';
-import ViewAppointments from './ViewAppointments';
+
 
 const Home = () => {
     //login user data
@@ -43,11 +43,19 @@ const Home = () => {
                             </Link>
 
                         </Grid>
-                        <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height: '50px', width: '50px' }}>
-                            <img src={appointmenticon} style={{ height: '270px', width: '270px' }} />
+                        {/* <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height: '50px', width: '50px' }}>
+                            <img src={myappointment} style={{ height: '270px', width: '270px' }} />
                             <Link to="/view-appointments">
                                 <Button variant="contained" fullWidth sx={{ marginTop: '12px' }}>
                                     View Appointments
+                                </Button></Link>
+
+                        </Grid> */}
+                        <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height: '50px', width: '50px' }}>
+                            <img src={doctoricon} style={{ height: '270px', width: '270px' }} />
+                            <Link to="/view-doctors">
+                                <Button variant="contained" fullWidth sx={{ marginTop: '12px' }}>
+                                    View Doctors
                                 </Button></Link>
 
                         </Grid>

@@ -1,17 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Grid, Button, Box } from '@mui/material';
 import doctoricon from '../pages-assets/doctoricon.jpg';
 import usericon from '../pages-assets/usericon.jpg';
 import appointmenticon from '../pages-assets/appointmenticon.jpg';
 import { Link } from 'react-router-dom';
-// import AdminNav from '../../components/Navbar/AdminNav';
-import UserNav from '../../components/Navbar/UserNav'
+import axios from 'axios';
 
 
 
 
 
 const AdminHome = () => {
+    //login admin data
+    const getAdminData = async () => {
+        try {
+            const res = await axios.post(
+                "/api/v1/user/getAdminData",
+                {},
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token"),
+                    },
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getAdminData();
+    }, []);
 
     return (
         <>

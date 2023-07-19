@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
+import { setUser } from '../redux/features/userSlice'
 
 const layout = {
     // labelCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 8 }, lg: { span: 8 } },
@@ -28,11 +29,13 @@ const Login = () => {
             console.log('Response:', res.data); // Check the response data
             if (res.data.success) {
                 localStorage.setItem("token", res.data.token)
+                localStorage.setItem("isAdmin", res.data.data.isAdmin)
                 message.success('Login Successful')
                 // navigate('/')
 
                 const isAdmin = res.data.data.isAdmin;
 
+                dispatch(setUser(res.data.data));
                 if (isAdmin) {
                     navigate('/admin');
                 } else {
