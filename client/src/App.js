@@ -38,7 +38,7 @@ function App() {
               <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
               <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               <Route path="/admin" element={<ProtectedRoute><AdminLayout><AdminHome /></AdminLayout></ProtectedRoute>} />
-              <Route path="/admin/appointments" element={<ProtectedRoute><AdminLayout><Appointments /></AdminLayout></ProtectedRoute>} />
+              <Route path="/view-appointments" element={<ProtectedRoute><AdminLayout><Appointments /></AdminLayout></ProtectedRoute>} />
               <Route path="/admin/doctors" element={<ProtectedRoute><AdminLayout><ManageDoctors /></AdminLayout></ProtectedRoute>} />
               <Route path="/admin/doctor-add" element={<ProtectedRoute><AdminLayout><AddDoctor /></AdminLayout></ProtectedRoute>} />
               <Route path="/admin/users" element={<ProtectedRoute><AdminLayout><ManageUsers /></AdminLayout></ProtectedRoute>} />

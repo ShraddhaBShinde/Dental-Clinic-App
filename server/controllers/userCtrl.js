@@ -140,6 +140,24 @@ const getDoctorDetailsController = async (req, res) => {
     }
 };
 
+const getAppointmentsData = async (req, res) => {
+    try {
+        // Fetch all doctor documents from the database
+        const appointments = await appointmentModel.find();
+
+        res.status(200).send({
+            success: true,
+            data: appointments,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({
+            success: false,
+            error: 'Server Error',
+        });
+    }
+};
+
 
 const authController = async (req, res) => {
     try {
@@ -170,4 +188,4 @@ const authController = async (req, res) => {
     }
 };
 
-module.exports = { loginController, signupController, bookAppointmentController, getDoctorDetailsController, getAdminDataController, authController };
+module.exports = { loginController, signupController, bookAppointmentController, getDoctorDetailsController, getAppointmentsData, getAdminDataController, authController };

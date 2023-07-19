@@ -13,7 +13,7 @@ const AddDoctor = () => {
     const handleFinish = async (values) => {
         try {
             dispatch(showLoading());
-            const res = await axios.post('/api/v1/admin/doctor-add', values);
+            const res = await axios.post('/api/v1/user/doctor-add', values);
             console.log(res.data);
 
             dispatch(hideLoading());
@@ -116,8 +116,8 @@ const AddDoctor = () => {
                     </Col>
                     <Col xs={24} md={24} lg={8}>
                         <Form.Item
-                            label="Fees Per Cunsaltation"
-                            name="feesPerCunsaltation"
+                            label="Fees Per Consultation"
+                            name="feesPerConsultation"
                             required
                             rules={[{ required: true }]}
                         >

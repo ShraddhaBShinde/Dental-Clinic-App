@@ -30,7 +30,7 @@ import { message } from 'antd';
 const settings = [
     // { title: "Home", path: "/" },
     { title: "Book Appointment", path: "/book-appointment" },
-    { title: "View appointments", path: "/view-appointments" },
+    // { title: "View appointments", path: "/view-appointments" },
     { title: "View doctors", path: "/view-doctors" },
     // { title: "Login", path: "/login" },
     { title: "Logout", path: "/login " },

@@ -1,7 +1,7 @@
 const express = require('express');
-const { loginController, signupController, bookAppointmentController, getDoctorDetailsController, authController, getAdminDataController } = require('../controllers/userCtrl');
+const { loginController, signupController, bookAppointmentController, getDoctorDetailsController, getAppointmentsData, authController, getAdminDataController } = require('../controllers/userCtrl');
 const { getUserDetailsController, addDoctorController, deleteDoctorController } = require('../controllers/adminCtrl')
-const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware')
+const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware');
 // const authMiddleware = require('../middlewares/authMiddleware')
 
 //router object
@@ -22,6 +22,7 @@ router.post('/doctor-add', addDoctorController);
 //Auth||get
 router.get('/doctors', getDoctorDetailsController);
 router.get('/users', getUserDetailsController);
+router.get('/appointments', getAppointmentsData)
 
 router.post("/book-appointment", authMiddleware, bookAppointmentController);
 

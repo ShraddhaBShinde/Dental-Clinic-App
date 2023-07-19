@@ -63,7 +63,7 @@ const ManageDoctors = () => {
 
     return (
         <div >
-            <h2 style={{ textAlign: 'center' }}>Manage Doctors</h2>
+            <h2 style={{ fontSize: '36px', fontWeight: 'bold', fontStyle: 'italic', color: '#2E3B55', marginTop: '24px', textAlign: 'center' }}>Manage Doctors</h2>
             <div >
                 <TableContainer component={Paper} >
                     <Table>
